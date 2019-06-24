@@ -1,0 +1,57 @@
+{
+  "name": "tez-baker-js",
+  "version": "0.0.1",
+  "description": "Tezos JavaScript Baker",
+  "main": "index.js",
+  "browser": "dist/web/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "tsc -p ./tslint.json",
+    "build": "tsc && webpack --config webpack.config.js --progress"
+  },
+  "keywords": [
+    "Tezos",
+    "JavaScript",
+    "Baker"
+  ],
+  "author": "Andrew Kishino",
+  "license": "MIT",
+  "dependencies": {
+    "detect-node": "^2.0.4",
+    "libsodium-wrappers": "^0.7.3",
+    "sotez": "^0.4.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/runtime": "^7.4.5",
+    "@types/libsodium-wrappers": "^0.7.5",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "eslint": "^6.0.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^24.3.1",
+    "terser-webpack-plugin": "^1.2.2",
+    "typescript": "^3.5.2",
+    "unminified-webpack-plugin": "^2.0.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewKishino/TezBakerJS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AndrewKishino/TezBakerJS/issues"
+  },
+  "homepage": "https://github.com/AndrewKishino/TezBakerJS#readme"
+}
