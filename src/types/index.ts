@@ -243,7 +243,7 @@ export interface Utility {
   b582int: (v: string) => string;
   totez: (mutez: number) => number;
   mutez: (tez: number) => string;
-  b58cencode: (payload: (string | Uint8Array), prefixArg: Uint8Array) => string;
+  b58cencode: (payload: string | Uint8Array, prefixArg: Uint8Array) => string;
   b58cdecode: (enc: string, prefixArg: Uint8Array) => string;
   buf2hex: (buffer: any) => string;
   hex2buf: (hex: string) => Uint8Array;
@@ -263,13 +263,23 @@ export interface Crypto {
   extractKeys: (sk: string, password?: string) => Promise<Keys>;
   generateMnemonic: () => string;
   checkAddress: (address: string) => boolean;
-  generateKeys: (mnemonic: string, passphrase: string) => Promise<KeysMnemonicPassphrase>;
-  sign: (bytes: string, sk: string, watermark: Uint8Array, password?: string) => Promise<Signed>;
+  generateKeys: (
+    mnemonic: string,
+    passphrase: string,
+  ) => Promise<KeysMnemonicPassphrase>;
+  sign: (
+    bytes: string,
+    sk: string,
+    watermark: Uint8Array,
+    password?: string,
+  ) => Promise<Signed>;
   verify: (bytes: string, sig: string, pk: string) => Promise<number>;
 }
 
 export interface Ledger {
-  getAddress: (arg: LedgerGetAddress) => Promise<{ address: string; publicKey: string }>;
+  getAddress: (
+    arg: LedgerGetAddress,
+  ) => Promise<{ address: string; publicKey: string }>;
   signOperation: (arg: LedgerSignOperation) => Promise<string>;
   getVersion?: () => Promise<LedgerGetVersion>;
 }
@@ -292,7 +302,7 @@ export interface Forge {
 
 export interface OperationParams {
   operation: Operation[];
-  source?: string,
+  source?: string;
   skipPrevalidation?: boolean;
   skipSignature?: boolean;
 }
@@ -303,7 +313,11 @@ export interface Tez {
   _counters: { [key: string]: number };
   _debugMode: boolean;
   key: Key;
-  importKey: (key: string, passphrase?: string, email?: string) => Promise<void>;
+  importKey: (
+    key: string,
+    passphrase?: string,
+    email?: string,
+  ) => Promise<void>;
   importLedger: () => Promise<void>;
   query: (path: string, payload?: any, method?: string) => Promise<any>;
   account: (arg: AccountParams) => Promise<any>;
@@ -322,7 +336,11 @@ export interface Tez {
   getCurrentProposal: () => Promise<string>;
   getCurrentPeriod: () => Promise<string>;
   getCurrentQuorum: () => Promise<number>;
-  awaitOperation: (hash: string, interval: number, timeout: number) => Promise<string>;
+  awaitOperation: (
+    hash: string,
+    interval: number,
+    timeout: number,
+  ) => Promise<string>;
   sendOperation: (arg: OperationParams) => Promise<any>;
   prepareOperation: (arg: OperationParams) => Promise<ForgedBytes>;
   call: (path: string, payload?: OperationObject) => Promise<any>;
@@ -337,15 +355,21 @@ export interface Tez {
   typecheckCode: (code: string) => Promise<any>;
   packData: (data: string, type: string) => Promise<any>;
   typecheckData: (data: string, type: string) => Promise<any>;
-  runCode: (code: string, amount: number, input: string, storage: string, trace: boolean) => Promise<any>;
+  runCode: (
+    code: string,
+    amount: number,
+    input: string,
+    storage: string,
+    trace: boolean,
+  ) => Promise<any>;
 }
 
 export interface Contract {
-  hash: (arg0: string, arg1: number) => Promise<any>,
-  originate: (arg0: ContractParams) => Promise<any>,
-  storage: (arg0: string) => Promise<any>,
-  load: (arg0: string) => Promise<any>,
-  watch: (arg0: string, arg1: number, arg2: (arg0: any) => any) => any,
+  hash: (arg0: string, arg1: number) => Promise<any>;
+  originate: (arg0: ContractParams) => Promise<any>;
+  storage: (arg0: string) => Promise<any>;
+  load: (arg0: string) => Promise<any>;
+  watch: (arg0: string, arg1: number, arg2: (arg0: any) => any) => any;
 }
 
 export interface TezModuleInterface {
@@ -363,8 +387,8 @@ export interface ModuleOptions {
 }
 
 export interface Key {
-  _publicKey: (string | Uint8Array);
-  _secretKey?: (string | Uint8Array);
+  _publicKey: string | Uint8Array;
+  _secretKey?: string | Uint8Array;
   _isLedger: boolean;
   _ledgerPath: string;
   _ledgerCurve: number;
@@ -374,7 +398,12 @@ export interface Key {
   ledgerCurve: number;
   ready: Promise<void>;
   curve: string;
-  initialize: (key: string, passphrase?: string, email?: string, resolve?: any) => Promise<void>;
+  initialize: (
+    key: string,
+    passphrase?: string,
+    email?: string,
+    resolve?: any,
+  ) => Promise<void>;
   publicKey: () => string;
   secretKey: () => string;
   publicKeyHash: () => string;
@@ -382,41 +411,40 @@ export interface Key {
   verify: (bytes: string, signature: string) => Promise<boolean>;
 }
 
-
 export type BakerUtilsOptions = {
   defaultFee?: number;
   debugMode?: boolean;
   localForge?: boolean;
   validateLocalForge?: boolean;
-  baker?: string,
-  serviceFee?: number,
+  baker?: string;
+  serviceFee?: number;
 };
 
 export type BakerOptions = {
-  debugMode?: boolean,
+  debugMode?: boolean;
 };
 
 export interface BakerUtilsInterface {
-  _serviceFee: number,
-  BLOCKS_PER_SNAPSHOT: number,
-  BLOCKS_PER_CYCLE: number,
-  TRANSACTION_FEE: number,
-  PRESERVED_CYCLES: number,
+  _serviceFee: number;
+  BLOCKS_PER_SNAPSHOT: number;
+  BLOCKS_PER_CYCLE: number;
+  TRANSACTION_FEE: number;
+  PRESERVED_CYCLES: number;
 }
 
 export interface StoreInterface {
-  _bknonces: Array<string>,
-  bknonces: any,
+  _bknonces: Array<string>;
+  bknonces: any;
 }
 
 export interface BakerInterface {
-  store: StoreInterface,
-  logOutput: (arg1: any, arg2: any) => any,
+  store: StoreInterface;
+  logOutput: (arg1: any, arg2: any) => any;
   revealNonces: (arg1: any, arg2: any) => any;
-  addNonce: (arg1: any) => any,
-  cycleToLevelStart: (arg1: number) => number,
-  levelToCycle: (arg1: number) => number,
-  cycleToLevelEnd: (arg1: number) => number,
+  addNonce: (arg1: any) => any;
+  cycleToLevelStart: (arg1: number) => number;
+  levelToCycle: (arg1: number) => number;
+  cycleToLevelEnd: (arg1: number) => number;
   startLevel: number;
   bakeIntervalId: number | boolean;
   injectedBlocks: Array<any>;
@@ -428,6 +456,6 @@ export interface BakerInterface {
   noncesToReveal: Array<any>;
   lastLevel: number;
   bakedBlocks: Array<any>;
-  mempoolEndorsementCount: number;
-  mempoolChecks: Array<boolean>;
+  requiredEndorsements: number;
+  mempoolCheckCount: number;
 }
