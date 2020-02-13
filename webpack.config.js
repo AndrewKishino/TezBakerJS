@@ -10,18 +10,7 @@ module.exports = {
     extensions: ['.ts', '.js'],
     modules: [__dirname, 'node_modules'],
   },
-  module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-    ],
-  },
-  entry: {
-    main: './src/index.ts',
-  },
+  entry: path.join(__dirname, 'lib', 'index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'index.js',

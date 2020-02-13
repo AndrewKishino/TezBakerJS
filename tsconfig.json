@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
-    "outFile": "./dist/types/index.d.ts",
-    "target": "esnext",
+    "baseUrl": ".",
+    "composite": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "moduleResolution": "node",
+    "declarationDir": "dist/types",
     "esModuleInterop": true,
+    "lib": ["dom", "es2017"],
+    "moduleResolution": "node",
+    "outDir": "lib",
+    "rootDir": "src",
     "strict": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "target": "es6"
   },
-  "include": [
-    "./src"
-  ]
+  "include": ["src/**/*"]
 }
